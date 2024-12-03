@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/Layout.astro
-title: Spatial-temporal Adaptive Planning of Flood Managed Aquifer Recharge via Deep Reinforcement Learning
-description: a multi-objective spatially explicit planning model called Spatial-TEmporal Learning for LAndscape Repurposing (STELLAR) for adaptive agriculture and water management focusing on Flood-MAR.
+title: "STELLAR: Spatial-TEmporal Learning for LAndscape Repurposing"
+description: "a multi-objective spatially explicit planning model called Spatial-TEmporal Learning for LAndscape Repurposing (STELLAR) for adaptive agriculture and water management focusing on Flood-MAR."
 favicon: favicon.svg
 thumbnail: screenshot.png
 ---
@@ -9,7 +9,6 @@ thumbnail: screenshot.png
 import Layout from "../layouts/Layout.astro";
 
 import Header from "../components/Header.astro";
-import Video from "../components/Video.astro";
 import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
@@ -18,9 +17,9 @@ import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 
-import outside from "../assets/outside.mp4";
 import transformer from "../assets/transformer.webp";
 import Splat from "../components/Splat.tsx"
+import cover from "../assets/cover.pdf";
 
 import CodeBlock from "../components/CodeBlock.astro";
 import Table from "../components/Table.astro";
@@ -36,6 +35,7 @@ export const components = {pre: CodeBlock, table: Table}
     },
     {
       name: "Xiaogang He",
+      url: "http://hydro.iis.u-tokyo.ac.jp/~hexg/cv.html",
       notes: ["†"],
       institution: "National University of Singapore",
     },
@@ -53,19 +53,21 @@ export const components = {pre: CodeBlock, table: Table}
       icon: "fa-solid:file-pdf",
     },
     {
-      name: "Code (Coming soon)",
+      name: "Code",
       url: "https://github.com/MeilianLee/STELLAR",
       icon: "mdi:github",
     },
-    {
-      name: "arXiv (Coming soon)",
-      url: "",
-      icon: "academicons:arxiv",
-    },
+    // {
+    //   name: "arXiv (Coming soon)",
+    //   url: "",
+    //   icon: "academicons:arxiv",
+    // },
   ]}
   />
 
-<Video source={outside} />
+<Figure>
+  <Image source={cover} altText="Cover image" width={800} height={450} />
+</Figure>
 
 <HighlightedSection>
 
