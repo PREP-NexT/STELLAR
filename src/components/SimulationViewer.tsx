@@ -87,7 +87,7 @@ export default function SimulationViewer({ timeSeriesData, state }: Props) {
           <div className="map-container"  style={{ height: '310px', marginTop: '1.5rem'}}>
             <div className="big-map-title">New actions in each year</div>
             <img 
-              src={`/data_stoc_drl/actions/action_year${currentYear}.png`}
+              src={`./data_stoc_drl/actions/action_year${currentYear}.png`}
               alt={`Actions Year ${currentYear}`}
               className="w-full h-auto"
               onError={(e) => {
@@ -119,7 +119,7 @@ export default function SimulationViewer({ timeSeriesData, state }: Props) {
           <div className="map-container" style={{ height: '200px', marginTop: '-4rem' }}>
             <div className="map-title">{stateInfo.label}</div>
             <img 
-              src={`/data_stoc_drl/states/${stateInfo.key}/${stateInfo.key}_year${currentYear}.png`}
+              src={`./data_stoc_drl/states/${stateInfo.key}/${stateInfo.key}_year${currentYear}.png`}
               alt={`${stateInfo.label} Year ${currentYear}`}
               className="w-full h-auto"
               onError={(e) => {
