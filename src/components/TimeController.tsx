@@ -12,7 +12,7 @@ export default function TimeController() {
       interval = window.setInterval(() => {
         setCurrentYear((year: number) => {
           const nextYear = year + 1;
-          return nextYear >= 10 ? 0 : nextYear;
+          return nextYear > 9 ? 0 : nextYear;
         });
       }, 1000);
     }

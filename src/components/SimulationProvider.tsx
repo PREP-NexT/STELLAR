@@ -20,7 +20,7 @@ interface Props {
 }
 
 export function SimulationProvider({ children }: Props) {
-  const [currentYear, setCurrentYear] = useState(0);
+  const [currentYear, setCurrentYear] = useState(1);
 
   return (
     <React.Fragment>
