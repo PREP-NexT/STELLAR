@@ -1,0 +1,77 @@
+.time-controller {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-right: 3rem;
+}
+
+.button-group {
+  display: flex;
+  border: 1px solid #0066cc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.control-button {
+  background: white;
+  color: #0066cc;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.control-button:hover {
+  background: #f0f7ff;
+}
+
+.control-button:first-child {
+  border-right: 1px solid #0066cc;
+}
+
+.slider-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.time-slider {
+  width: 100%;
+  height: 4px;
+  -webkit-appearance: none;
+  background: #e2e8f0;
+  border-radius: 2px;
+  outline: none;
+}
+
+.time-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #0066cc;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.time-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.year-label {
+  font-size: 0.875rem;
+  color: #4a5568;
+  text-align: center;
+} 

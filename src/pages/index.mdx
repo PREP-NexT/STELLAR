@@ -9,6 +9,7 @@ thumbnail: screenshot.png
 import Layout from "../layouts/Layout.astro";
 
 import Header from "../components/Header.astro";
+import Video from "../components/Video.astro";
 import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
@@ -16,14 +17,40 @@ import Image from "../components/Image.astro";
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
+import Quote from "../components/Quote.astro";
 
 import transformer from "../assets/transformer.webp";
 import Splat from "../components/Splat.tsx"
-import cover from "../assets/cover.pdf";
+import cover from "../assets/cover_small.png";
+import framework from "../assets/framework.png";
+import formulation from "../assets/RL_formulation.png";
 
 import CodeBlock from "../components/CodeBlock.astro";
 import Table from "../components/Table.astro";
+import Spacer from "../components/Spacer.astro";
+import SimulationViewer from '../components/SimulationViewer';
+import gwcTimeSeries from '../data/data_stoc_drl/timeseries/gwc.json';
+import TimeController from '../components/TimeController';
+import { SimulationProvider } from '../components/SimulationProvider';
+import SimulationSection from '../components/SimulationSection';
+
 export const components = {pre: CodeBlock, table: Table}
+
+export const spatialData = async () => {
+  return Array.from({ length: 10 }, () => ({
+    landuse: Array.from({ length: 50 }, () => 
+      Array.from({ length: 50 }, () => Math.random() > 0.8 ? 1 : 0)
+    ),
+    groundwater: Array.from({ length: 50 }, () => 
+      Array.from({ length: 50 }, () => Math.random() * 2 - 1)
+    )
+  }));
+};
+
+export const currentYear = 0;
+export const setCurrentYear = (year) => {
+  currentYear = year;
+};
 
 <Header
   title={frontmatter.title}
@@ -48,13 +75,13 @@ export const components = {pre: CodeBlock, table: Table}
   ]}
   links={[
     {
-      name: "Paper (Coming soon)",
-      url: "",
+      name: "Poster",
+      url: "https://agu24.ipostersessions.com/Default.aspx?s=FB-78-E7-1D-E4-F8-37-A6-5B-AD-5D-ED-67-BC-78-12",
       icon: "fa-solid:file-pdf",
     },
     {
-      name: "Code",
-      url: "https://github.com/MeilianLee/STELLAR",
+      name: "Code (Coming soon)",
+      url: "https://github.com/PREP-NexT",
       icon: "mdi:github",
     },
     // {
@@ -66,16 +93,123 @@ export const components = {pre: CodeBlock, table: Table}
   />
 
 <Figure>
-  <Image source={cover} altText="Cover image" width={800} height={450} />
+  <Image 
+    source={cover} 
+    altText="Cover image" 
+    format="original"
+    quality={100}
+  />
 </Figure>
 
 <HighlightedSection>
-
 ## Abstract
 
-This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
-
+Flood-managed aquifer recharge (Flood-MAR) is a promising solution for mitigating flood and drought risks 
+while enhancing groundwater supply. The key challenge lies in optimizing water and land allocation for recharge 
+across space and time. Traditional planning approaches rely on static policies and perfect future predictions, 
+making them inadequate for dynamic and uncertain environments. Here, we propose a spatially explicit planning 
+framework using deep reinforcement learning (DRL) for adaptive agriculture and water management. Our approach 
+employs proximal policy optimization to train networks that generate pixel-level decisions and evaluate policy 
+performance. Through a case study in California's San Joaquin Valley, we demonstrate Flood-MAR's potential for 
+risk mitigation and DRL's effectiveness in developing adaptive management strategies.
 </HighlightedSection>
+
+{/*
+<Quote 
+  title="TL;DR"
+  content="
+  Managed aquifer recharge (MAR): "
+/>
+*/}
+
+## Motivation
+
+### Growing Pressures on Agricultural Landscapes
+Agricultural landscapes are facing mounting pressures from increasing conflicts of water and land use. 
+Meanwhile, unsustainable water and land use practices have led to serious environmental concerns, 
+including groundwater depletion and biodiversity loss. Climate change further exacerbates these challenges 
+by altering precipitation patterns and increasing the frequency and severity of extreme events like floods and droughts.
+
+### Need for Sustainable Transition
+These agricultural landscapes urgently need to transition toward sustainable practices that:<br />
+• Deliver multiple socio-economic and environmental benefits<br />
+• Minimize trade-offs in water and land use under deep uncertainty<br />
+• Adapt water and land use management to keep pace with the changing climate
+
+### Role of Managed Aquifer Recharge
+Water storage infrastructure is a key adaptation option for sustaining agricultural landscapes under uncertainty. 
+However, conventional storage solutions no longer suffice to meet future water storage demands. 
+Given the vast storage capacities of groundwater aquifers, managed aquifer recharge (MAR) offers a largely untapped 
+opportunity to augment groundwater supply while supporting agriculture development and ecosystem health.
+
+{/*
+### Limitations of Traditional Approaches
+Traditional spatial planning approaches face several key limitations:<br />
+• Assume perfect system information<br />
+• Rely on static policies<br />
+• Neglect the dynamics and uncertainties inherent in the system<br />
+• Lead to high risks of suboptimal performance and unexpected failures
+*/}
+
+### Opportunities of AI
+Traditional planning approaches often assume perfect system information and rely on static policies, which cannot 
+well adapt to dynamic and uncertain environments. Recent advances in artificial intelligence, specifically Deep 
+Reinforcement Learning (DRL), offer a scalable solution by learning optimal strategies through iterative agent-environment 
+interactions, effectively handling large state and action spaces.
+
+{/*
+### Call for Innovation
+There is an urgent need for adaptive and resilient planning frameworks that can effectively account for dynamic interactions between 
+water resource management and agricultural sustainability under varying climatic conditions.
+*/}
+
+<Spacer size="0.5rem" />
+
+## STELLAR Model
+### Overall Framework
+
+We present **STELLAR** (**S**patial-**T**emporal **L**earning for **LA**ndscape **R**epurposing), a novel spatial-temporal adaptive planning 
+framework that leverages deep reinforcement learning (DRL) to optimize the joint management of agricultural landscapes 
+and groundwater resources, with particular emphasis on Flood-Managed Aquifer Recharge (Flood-MAR). The optimization 
+problem is formulated as a sequential Markov Decision Process (MDP) and solved using an actor-critic-based DRL 
+architecture.
+
+STELLAR consists of the following essential components:<br />
+• **Agent**: The central decision-maker responsible for regional land-use planning<br />
+• **Environment**: The coupled agricultural-water systems that model dynamic interactions between water demand and supply above and below the ground<br />
+• **Actor Network**: Generates pixel-level probabilistic land-use decisions based on current system states<br />
+• **Critic Network**: Evaluates policy performance through value estimation<br />
+• **Policy Optimization**: Utilizes the Proximal Policy Optimization (PPO) algorithm to ensure stable learning within trust regions
+
+<div style={{width: "50%", margin: "0 auto"}}>
+  <Figure>
+    <Image 
+      source={framework} 
+      altText="STELLAR model framework and structure"
+    />
+  </Figure>
+</div>
+
+This integrated, AI-driven approach not only minimizes the trade-offs on water and land use within the water-agriculture nexus, 
+but also provides a robust tool for policymakers and stakeholders to make decisions systematically in the face of increasing climatic 
+uncertainties.
+
+### Model Formulation
+
+### Baseline Strategies
+
+<Spacer size="0.5rem" />
+
+## Results
+### Planning performance for an unseen surface water supply series
+
+<SimulationSection client:load timeSeriesData={gwcTimeSeries} />
+
+### Adaptive planning for stochastic and non-stationary environment
+
+### Transferability to other regions
+
+{/* </HighlightedSection>
 
 ## Figures
 
@@ -129,13 +263,16 @@ You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.g
 | DistilBERT | 0.86 | 0.84 | 2.1 |
 | XLNet | 0.90 | 0.89 | 6.8 |
 
+*/}
+
 ## BibTeX citation
 
 ```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+@inproceedings{li2024stellar,
+  author = {Li, Meilian and He, Xiaogang},
+  title = {Spatial-temporal Adaptive Planning of Flood Managed Aquifer Recharge Guided by Deep Reinforcement Learning},
+  year = {2024},
+  booktitle = {AGU Fall Meeting},
+  location = {Washington, D.C.},
 }
 ```
