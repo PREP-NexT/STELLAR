@@ -10,17 +10,31 @@ export default function TimeController() {
     let interval: number;
     if (isPlaying) {
       interval = window.setInterval(() => {
-        setCurrentYear((year: number) => (year + 1) % 10);
+        setCurrentYear((year: number) => {
+          const nextYear = year + 1;
+          return nextYear >= 10 ? 0 : nextYear;
+        });
       }, 1000);
     }
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
   }, [isPlaying, setCurrentYear]);
+
+  const handlePrevYear = () => {
+    setCurrentYear((year) => {
+      const prevYear = year - 1;
+      return prevYear < 0 ? 9 : prevYear;
+    });
+  };
 
   return (
     <div className={styles['time-controller']}>
       <div className={styles['button-group']}>
         <button 
-          onClick={() => setCurrentYear((year) => (year + 9) % 10)}
+          onClick={handlePrevYear}
           className={styles['control-button']}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
